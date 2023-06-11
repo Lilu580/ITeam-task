@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -52,6 +53,9 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "github-pages": {
+              "baseHref": "/Iteam-task/"
             }
           },
           "defaultConfiguration": "production"
@@ -87,12 +91,24 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.css"
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/iteam-task",
+            "netlifyToken": "GLODswd0DC4cbyJAoBZ86WSfG9nV_Ed8upulQZHN5KY",
+            "siteId": "ba5fabd0-6427-401b-90d3-d9f720b690bb"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "6b1a9eb1-a5cc-44c9-b747-dbfe45f50e0f"
   }
 }

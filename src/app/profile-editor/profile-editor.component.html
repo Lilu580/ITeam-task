@@ -1,0 +1,89 @@
+<div class="container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="formContainer">
+    <mat-form-field>
+      <input matInput placeholder="First name" formControlName="firstName">
+
+      <mat-error *ngIf="this.profileForm.controls['firstName'].hasError('required')">
+        First name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field >
+      <input matInput placeholder="Last name" formControlName="lastName">
+
+      <mat-error *ngIf="this.profileForm.controls['lastName'].hasError('required')">
+        Last name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date of bitrh" formControlName="dateOfBirth">
+
+      <mat-datepicker-toggle matSuffix [for]="picker"/>
+
+      <mat-datepicker #picker/>
+
+      <mat-error *ngIf="this.profileForm.controls['dateOfBirth'].hasError('required')">
+        Date of birth is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Choose your framework" formControlName="framework" (valueChange)="onSelectFramework()">
+        <mat-option *ngFor="let framework of frameworks" [value]="framework.name">
+          {{ framework.name }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="this.profileForm.controls['framework'].hasError('required')">
+        Framework is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Choose your framework version" formControlName="frameworkVersion">
+        <mat-option *ngFor="let version of selectedFramework" [value]="version">
+          {{ version }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="this.profileForm.controls['frameworkVersion'].hasError('required')">
+        Framework version is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field >
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="this.profileForm.controls['email'].hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="this.profileForm.controls['email'].hasError('email')">
+        <strong>Not a valid email</strong>
+      </mat-error>
+      <mat-error *ngIf="this.profileForm.controls['email'].hasError('emailExists')">
+        Email doesn`t <strong>exist</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div formArrayName="hobbies">
+      <div *ngFor="let hobby of hobbies.controls; let i = index">
+        <div [formGroupName]="i" class="hobbiesContainer">
+          <mat-form-field >
+            <input matInput formControlName="name" placeholder="Hobby Name">
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput formControlName="duration" placeholder="Duration">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttonsContainer">
+      <button mat-raised-button type="button" (click)="addHobby()">Add Hobby</button>
+
+      <button mat-raised-button (click)="onSubmit()" [disabled]="!profileForm.valid">Submit</button>
+    </div>
+    <p>{{this.profileForm.errors}}</p>
+  </form>
+</div>

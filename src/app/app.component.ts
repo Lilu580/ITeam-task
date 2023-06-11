@@ -1,4 +1,15 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+interface Item  {
+  name: string,
+  active: boolean,
+}
+
+const items: Item[] = [
+  {name: 'hello', active: false},
+  {name: 'angular', active: true}
+]
 
 @Component({
   selector: 'app-root',
@@ -6,5 +17,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ITeam-task';
 }

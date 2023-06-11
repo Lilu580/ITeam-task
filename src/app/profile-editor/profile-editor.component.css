@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(103, 103, 103, 0.886);
+  height: 100vh;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.hobbiesContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
