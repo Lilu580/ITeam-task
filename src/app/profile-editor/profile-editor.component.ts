@@ -25,12 +25,15 @@ const frameworks: Framework[] = [
   }
 ]
 
+const api_key = 'pF6a4LRdzM8rD7T3tWyUhQkVwPmc2IKN';
+
 
 @Component({
   selector: 'app-profile-editor',
   templateUrl: './profile-editor.component.html',
   styleUrls: ['./profile-editor.component.css']
 })
+
 export class ProfileEditorComponent {
   constructor(
     private fb: FormBuilder,
@@ -38,8 +41,8 @@ export class ProfileEditorComponent {
   ) {}
 
   profileForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: ['', [Validators.required, Validators.pattern(/^\S+$/)]],
+    lastName: ['', [Validators.required, Validators.pattern(/^\S+$/)]],
     dateOfBirth: ['', Validators.required],
     framework: ['', Validators.required],
     frameworkVersion:[{value: '', disabled: true}, Validators.required],
@@ -51,6 +54,13 @@ export class ProfileEditorComponent {
       }),
     ]),
   })
+
+  myFilter = (d: Date | null): boolean => {
+    const currentDate = new Date();
+    const selectedDate = d || new Date();
+
+    return selectedDate.getTime() < currentDate.getTime();
+  };
 
   frameworks = frameworks;
 
@@ -68,7 +78,7 @@ export class ProfileEditorComponent {
   }
 
   asyncEmailValidator(control: FormControl): Observable<ValidationErrors | null> {
-    return this.http.get(`https://emailverifierapi.com/v2/?apiKey=pF6a4LRdzM8rD7T3tWyUhQkVwPmc2IKN&email=${control.value}`)
+    return this.http.get(`https://emailverifierapi.com/v2/?apiKey=${api_key}&email=${control.value}`)
     .pipe(
       map((response: any) => response.status !== 'failed' ? null : { emailExists: true }),
       delay(2000)

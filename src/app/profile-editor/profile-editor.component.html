@@ -6,6 +6,9 @@
       <mat-error *ngIf="this.profileForm.controls['firstName'].hasError('required')">
         First name is <strong>required</strong>
       </mat-error>
+      <mat-error *ngIf="this.profileForm.controls['firstName'].hasError('pattern')">
+        Spaces<strong> not alowed </strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field >
@@ -14,11 +17,14 @@
       <mat-error *ngIf="this.profileForm.controls['lastName'].hasError('required')">
         Last name is <strong>required</strong>
       </mat-error>
+      <mat-error *ngIf="this.profileForm.controls['lastName'].hasError('pattern')">
+        Spaces<strong> not alowed </strong>
+      </mat-error>
     </mat-form-field>
 
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date of bitrh" formControlName="dateOfBirth">
+      <input matInput [matDatepicker]="picker" [matDatepickerFilter]="myFilter" placeholder="Choose a date of bitrh" formControlName="dateOfBirth">
 
       <mat-datepicker-toggle matSuffix [for]="picker"/>
 
