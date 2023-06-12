@@ -4,10 +4,10 @@ This project is test task from Iteam, was generated with [Angular CLI](https://g
 
 ## Technologies
 
-   *HTML
-   *CSS
-   *TS
-   *Angular
+   * HTML
+   * CSS
+   * TS
+   * Angular
 
 ## Demo
 
